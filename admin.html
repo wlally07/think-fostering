@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin | Think Fostering</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'DM Sans',sans-serif;background:#f8fafc;color:#1a1a1a;min-height:100vh}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:100}
+    .nav-logo{font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px;color:#1a1a1a;text-decoration:none}
+    .nav-logo-box{width:28px;height:28px;background:linear-gradient(135deg,#E8B931,#D4A020);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px}
+    .nav-badge{background:#0f172a;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;letter-spacing:.5px}
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 20px}
+    .card{background:#fff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden}
+    .btn{padding:9px 20px;background:#0f172a;color:#fff;border:none;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:6px}
+    .btn:disabled{opacity:.5;cursor:not-allowed}
+    .btn2{padding:9px 18px;background:#f1f5f9;color:#334155;border:1px solid #e2e8f0;border-radius:9px;cursor:pointer;font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:5px}
+    .btn-success{padding:9px 18px;background:#ecfdf5;color:#059669;border:1px solid #a7f3d0;border-radius:9px;cursor:pointer;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:5px}
+    .btn-danger{padding:8px 14px;background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:8px;cursor:pointer;font-size:12px;font-weight:500;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:4px}
+    .inp{width:100%;padding:10px 13px;border:1px solid #e2e8f0;border-radius:9px;font-size:14px;background:#f8fafc;outline:none;font-family:'DM Sans',sans-serif}
+    .inp:focus{border-color:#e91e8c;background:#fff}
+    .sel{width:100%;padding:10px 13px;border:1px solid #e2e8f0;border-radius:9px;font-size:14px;background:#f8fafc;outline:none;font-family:'DM Sans',sans-serif;appearance:auto}
+    .ta{width:100%;padding:10px 13px;border:1px solid #e2e8f0;border-radius:9px;font-size:14px;background:#f8fafc;outline:none;font-family:'DM Sans',sans-serif;resize:vertical;min-height:80px}
+    .lbl{display:block;font-size:11px;font-weight:700;color:#94a3b8;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+    .section-h{font-size:13px;font-weight:700;color:#e91e8c;border-bottom:2px solid #fce7f3;padding-bottom:8px;margin:20px 0 14px;text-transform:uppercase;letter-spacing:.5px}
+    .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+    .badge-green{background:#ecfdf5;color:#059669} .badge-amber{background:#fffbeb;color:#d97706} .badge-red{background:#fef2f2;color:#dc2626} .badge-grey{background:#f1f5f9;color:#64748b}
+    .tab-bar{display:flex;gap:3px;background:#f1f5f9;padding:3px;border-radius:9px;width:fit-content}
+    .tab{padding:7px 16px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:600;font-family:'DM Sans',sans-serif;background:transparent;color:#64748b;display:inline-flex;align-items:center;gap:5px}
+    .tab.active{background:#0f172a;color:#fff}
+    .tab .count{background:#dc2626;color:#fff;font-size:10px;padding:1px 6px;border-radius:10px;font-weight:700}
+    .benefit-tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;background:#ecfdf5;color:#059669;font-weight:500;margin:2px 3px 2px 0}
+    .benefit-btn{padding:6px 14px;border-radius:18px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid #e2e8f0;background:#fff;color:#475569;font-family:'DM Sans',sans-serif;transition:all .15s}
+    .benefit-btn.active{border:2px solid #059669;background:#ecfdf5;color:#059669}
+    .row{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid #f1f5f9;cursor:pointer;transition:background .15s}
+    .row:hover{background:#f8fafc}
+    .row:last-child{border-bottom:none}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .grid-full{grid-column:1/-1}
+    .detail-row{margin-bottom:12px}
+    .detail-label{font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+    .detail-value{font-size:14px;color:#334155}
+    /* Login */
+    .login-wrap{max-width:380px;margin:80px auto;padding:0 20px}
+    .login-card{background:#fff;border-radius:16px;border:1px solid #e2e8f0;padding:40px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+    @media(max-width:600px){.grid2{grid-template-columns:1fr} .row{flex-wrap:wrap}}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo"><div class="nav-logo-box">💛</div>Think Fostering <span class="nav-badge">ADMIN</span></a>
+  <a href="find-an-agency.html" class="btn2" style="font-size:12px">← Back to Site</a>
+</nav>
+
+<!-- LOGIN -->
+<div id="login-page" class="login-wrap">
+  <div class="login-card">
+    <div style="width:48px;height:48px;border-radius:14px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px">🔒</div>
+    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:20px;margin-bottom:6px">Admin Access</h2>
+    <p style="font-size:13px;color:#64748b;margin-bottom:20px">Enter your password to continue</p>
+    <input id="pw-input" type="password" class="inp" placeholder="Password" style="text-align:center;margin-bottom:10px" onkeydown="if(event.key==='Enter')doLogin()">
+    <p id="pw-error" style="color:#dc2626;font-size:12px;margin-bottom:8px;display:none">Incorrect password</p>
+    <button class="btn" style="width:100%;justify-content:center" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-page" style="display:none">
+  <div class="wrap">
+    <div class="tab-bar" id="tab-bar" style="margin-bottom:20px"></div>
+    <div id="admin-content"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const SUPA = "https://jixrqmlfuwsazzcfenmh.supabase.co";
+  const KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppeHJxbWxmdXdzYXp6Y2Zlbm1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDkwNDAsImV4cCI6MjA4ODM4NTA0MH0.FVFePooOrcqXR-TF6-90403K6lv5GbUY92MDD1H-Sd4";
+  const PW = "ThinkFoster2026!";
+  const REGIONS = ["North West","North East","Yorkshire and the Humber","West Midlands","East Midlands","East of England","South East","South West","London","Wales","Scotland","Northern Ireland"];
+  const BENEFITS = ["Training","24/7 Support","Respite Cover","Healthcare","Generous Allowances","Peer Support Groups","Dedicated Social Worker","Therapeutic Services","Education Support","Holiday Allowance","Tax Exemptions","Career Development","Insurance Cover","Annual Reviews"];
+
+  let currentTab = "agencies";
+  let agencies = [], applications = [], appFilter = "pending";
+
+  async function api(path, opts={}){
+    const r = await fetch(SUPA+"/rest/v1/"+path, {...opts, headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json",Prefer:opts.prefer||"return=representation",...opts.headers}});
+    if(!r.ok) throw new Error(await r.text());
+    const t = await r.text(); return t?JSON.parse(t):null;
+  }
+
+  function fmtSal(mn,mx,t){if(!mn&&!mx)return"";const f=v=>"£"+Number(v).toLocaleString();const s=t==="annual"?"/yr":t==="monthly"?"/mo":"/wk";if(mn&&mx)return f(mn)+"–"+f(mx)+s;return mn?"From "+f(mn)+s:"Up to "+f(mx)+s;}
+
+  // Login
+  window.doLogin = function(){
+    if(document.getElementById("pw-input").value===PW){
+      document.getElementById("login-page").style.display="none";
+      document.getElementById("admin-page").style.display="block";
+      loadAll();
+    } else {
+      document.getElementById("pw-error").style.display="block";
+    }
+  };
+
+  async function loadAll(){
+    agencies = await api("agencies?select=*&order=created_at.desc") || [];
+    applications = await api("agency_applications?select=*&order=created_at.desc") || [];
+    renderTabs();
+    renderContent();
+  }
+
+  function renderTabs(){
+    const pending = applications.filter(a=>a.status==="pending").length;
+    document.getElementById("tab-bar").innerHTML = `
+      <button class="tab ${currentTab==='agencies'?'active':''}" onclick="switchTab('agencies')">📋 Agencies (${agencies.length})</button>
+      <button class="tab ${currentTab==='applications'?'active':''}" onclick="switchTab('applications')">📥 Applications ${pending?'<span class="count">'+pending+'</span>':''}</button>
+    `;
+  }
+
+  window.switchTab = function(t){ currentTab=t; renderTabs(); renderContent(); };
+
+  function renderContent(){
+    const el = document.getElementById("admin-content");
+    if(currentTab==="agencies") renderAgencies(el);
+    else renderApplications(el);
+  }
+
+  // ─── AGENCIES TAB ───
+  function renderAgencies(el){
+    let h = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+      <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:24px">Manage Agencies</h1>
+      <button class="btn" onclick="showAgencyForm()">+ Add Agency</button>
+    </div>`;
+
+    if(agencies.length===0){
+      h += '<div class="card" style="padding:50px;text-align:center"><p style="color:#94a3b8">No agencies yet</p></div>';
+    } else {
+      h += '<div class="card">';
+      agencies.forEach(function(a){
+        const sal = fmtSal(a.salary_min,a.salary_max,a.salary_type);
+        h += `<div class="row" onclick="showAgencyForm('${a.id}')">
+          ${a.logo_url?'<img src="'+a.logo_url+'" style="width:40px;height:40px;border-radius:9px;object-fit:cover;border:1px solid #e2e8f0">':'<div style="width:40px;height:40px;border-radius:9px;background:linear-gradient(135deg,#E8B931,#D4A020);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:700;flex-shrink:0">'+(a.name?a.name.charAt(0):"?")+'</div>'}
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:6px"><span style="font-size:13px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.name}</span>${!a.is_active?'<span class="badge badge-amber" style="font-size:10px">Inactive</span>':''}</div>
+            <p style="font-size:11px;color:#94a3b8;margin-top:2px">${a.region||""}${a.city?" · "+a.city:""}${sal?" · "+sal:""}</p>
+          </div>
+          <button class="btn2" style="padding:6px 10px;font-size:11px" onclick="event.stopPropagation();showAgencyForm('${a.id}')">✏️ Edit</button>
+          <button class="btn-danger" style="padding:6px 10px" onclick="event.stopPropagation();deleteAgency('${a.id}','${a.name.replace(/'/g,"\\'")}')">🗑</button>
+        </div>`;
+      });
+      h += '</div>';
+    }
+    el.innerHTML = h;
+  }
+
+  // Agency form
+  window.showAgencyForm = function(id){
+    const a = id ? agencies.find(x=>x.id===id) : {};
+    const isEdit = !!id;
+    const benefits = Array.isArray(a.benefits)?a.benefits:[];
+    const el = document.getElementById("admin-content");
+
+    // Build benefits HTML
+    let bhtml = '<div style="display:flex;flex-wrap:wrap;gap:6px">';
+    BENEFITS.forEach(function(b){
+      const active = benefits.includes(b);
+      bhtml += '<button type="button" class="benefit-btn '+(active?'active':'')+'" onclick="this.classList.toggle(\'active\')" data-benefit="'+b+'">'+(active?"✓ ":"")+b+'</button>';
+    });
+    bhtml += '</div>';
+
+    let h = `<div class="card" style="padding:24px">
+      <button class="btn2" style="margin-bottom:16px;font-size:12px" onclick="renderContent()">← Back</button>
+      <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:22px;margin-bottom:20px">${isEdit?"Edit Agency":"Add Agency Manually"}</h2>
+      <div class="grid2">
+        <div class="section-h grid-full">Agency Details</div>
+        <div class="grid-full"><label class="lbl">Name *</label><input class="inp" id="ag-name" value="${a.name||""}"></div>
+        <div><label class="lbl">Email</label><input class="inp" id="ag-email" value="${a.email||""}"></div>
+        <div><label class="lbl">Phone</label><input class="inp" id="ag-phone" value="${a.phone||""}"></div>
+        <div><label class="lbl">Website</label><input class="inp" id="ag-website" value="${a.website||""}"></div>
+        
+        <div class="section-h grid-full">Contact Person</div>
+        <div><label class="lbl">First Name</label><input class="inp" id="ag-cfn" value="${a.contact_firstname||""}"></div>
+        <div><label class="lbl">Surname</label><input class="inp" id="ag-csn" value="${a.contact_surname||""}"></div>
+        <div><label class="lbl">Contact Email</label><input class="inp" id="ag-cemail" value="${a.contact_email||""}"></div>
+        <div><label class="lbl">Contact Phone</label><input class="inp" id="ag-cphone" value="${a.contact_phone||""}"></div>
+        
+        <div class="section-h grid-full">Address</div>
+        <div><label class="lbl">Address 1</label><input class="inp" id="ag-addr1" value="${a.address_line1||""}"></div>
+        <div><label class="lbl">Address 2</label><input class="inp" id="ag-addr2" value="${a.address_line2||""}"></div>
+        <div><label class="lbl">City</label><input class="inp" id="ag-city" value="${a.city||""}"></div>
+        <div><label class="lbl">County</label><input class="inp" id="ag-county" value="${a.county||""}"></div>
+        <div><label class="lbl">Postcode</label><input class="inp" id="ag-postcode" value="${a.postcode||""}"></div>
+        <div><label class="lbl">Region *</label><select class="sel" id="ag-region"><option value="">-- Select --</option>${REGIONS.map(r=>'<option'+(r===a.region?' selected':'')+'>'+r+'</option>').join("")}</select></div>
+        
+        <div class="section-h grid-full">About</div>
+        <div class="grid-full"><label class="lbl">Description</label><textarea class="ta" id="ag-desc">${a.description||""}</textarea></div>
+        <div class="grid-full"><label class="lbl">Services</label><textarea class="ta" id="ag-services">${a.services||""}</textarea></div>
+        
+        <div class="section-h grid-full">Ofsted</div>
+        <div><label class="lbl">Reg. Number</label><input class="inp" id="ag-ofsted-reg" value="${a.ofsted_registration_number||""}"></div>
+        <div><label class="lbl">Rating</label><select class="sel" id="ag-ofsted-rating"><option value="">-- Select --</option>${["Outstanding","Good","Requires Improvement","Inadequate","Not Yet Inspected"].map(r=>'<option'+(r===a.ofsted_rating?' selected':'')+'>'+r+'</option>').join("")}</select></div>
+        
+        <div class="section-h grid-full">Salary</div>
+        <div><label class="lbl">Min (£)</label><input class="inp" type="number" id="ag-sal-min" value="${a.salary_min||""}"></div>
+        <div><label class="lbl">Max (£)</label><input class="inp" type="number" id="ag-sal-max" value="${a.salary_max||""}"></div>
+        <div><label class="lbl">Period</label><select class="sel" id="ag-sal-type"><option value="weekly" ${a.salary_type==="weekly"?"selected":""}>Per Week</option><option value="monthly" ${a.salary_type==="monthly"?"selected":""}>Per Month</option><option value="annual" ${a.salary_type==="annual"?"selected":""}>Per Year</option></select></div>
+        
+        <div class="section-h grid-full">Benefits</div>
+        <div class="grid-full">${bhtml}</div>
+        
+        <div class="section-h grid-full">Logo & Status</div>
+        <div>
+          <label class="lbl">Logo</label>
+          <input type="file" accept="image/*" id="ag-logo-file" style="font-size:12px" onchange="uploadAgencyLogo(this)">
+          <input type="hidden" id="ag-logo-url" value="${a.logo_url||""}">
+          ${a.logo_url?'<img src="'+a.logo_url+'" style="height:40px;border-radius:8px;margin-top:6px;border:1px solid #e2e8f0">':''}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;padding-top:20px">
+          <input type="checkbox" id="ag-active" ${a.is_active!==false?"checked":""} style="width:16px;height:16px">
+          <label for="ag-active" style="font-size:13px;font-weight:500;cursor:pointer">Active</label>
+        </div>
+      </div>
+      <div style="border-top:1px solid #e2e8f0;padding-top:18px;margin-top:16px;display:flex;gap:10px">
+        <button class="btn" id="ag-save-btn" onclick="saveAgency('${id||""}')">${isEdit?"Update":"Add Agency"}</button>
+        <button class="btn2" onclick="renderContent()">Cancel</button>
+      </div>
+    </div>`;
+    el.innerHTML = h;
+  };
+
+  window.uploadAgencyLogo = async function(input){
+    const file = input.files[0]; if(!file) return;
+    try {
+      const fn = Date.now()+"-"+file.name;
+      const r = await fetch(SUPA+"/storage/v1/object/logos/"+fn, { method:"POST", headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":file.type}, body:file });
+      if(!r.ok) throw new Error();
+      document.getElementById("ag-logo-url").value = SUPA+"/storage/v1/object/public/logos/"+fn;
+    } catch(e){ alert("Logo upload failed"); }
+  };
+
+  window.saveAgency = async function(id){
+    const v = fid => (document.getElementById(fid).value||"").trim();
+    if(!v("ag-name")||!v("ag-region")) return alert("Name and region are required.");
+    
+    const selectedBenefits = Array.from(document.querySelectorAll(".benefit-btn.active")).map(b=>b.dataset.benefit);
+    const btn = document.getElementById("ag-save-btn");
+    btn.disabled=true; btn.textContent="Saving...";
+    
+    const d = {
+      name:v("ag-name"), email:v("ag-email"), phone:v("ag-phone"), website:v("ag-website"),
+      contact_firstname:v("ag-cfn"), contact_surname:v("ag-csn"), contact_email:v("ag-cemail"), contact_phone:v("ag-cphone"),
+      address_line1:v("ag-addr1"), address_line2:v("ag-addr2"), city:v("ag-city"), county:v("ag-county"),
+      postcode:v("ag-postcode"), region:v("ag-region"), description:v("ag-desc"), services:v("ag-services"),
+      ofsted_registration_number:v("ag-ofsted-reg"), ofsted_rating:v("ag-ofsted-rating"),
+      salary_min:v("ag-sal-min")?Number(v("ag-sal-min")):null, salary_max:v("ag-sal-max")?Number(v("ag-sal-max")):null,
+      salary_type:v("ag-sal-type"), benefits:selectedBenefits, logo_url:v("ag-logo-url")||null,
+      is_active:document.getElementById("ag-active").checked
+    };
+
+    try {
+      if(id) { d.updated_at=new Date().toISOString(); await api("agencies?id=eq."+id,{method:"PATCH",body:JSON.stringify(d)}); }
+      else await api("agencies",{method:"POST",body:JSON.stringify(d)});
+      await loadAll();
+    } catch(e){ alert("Error: "+e.message); btn.disabled=false; btn.textContent=id?"Update":"Add Agency"; }
+  };
+
+  window.deleteAgency = async function(id,name){
+    if(!confirm('Delete "'+name+'"?')) return;
+    try { await api("agencies?id=eq."+id,{method:"DELETE"}); await loadAll(); } catch(e){ alert("Error: "+e.message); }
+  };
+
+  // ─── APPLICATIONS TAB ───
+  function renderApplications(el){
+    const filtered = applications.filter(a=>a.status===appFilter);
+    let h = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+      <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:24px">Applications</h1>
+      <div style="display:flex;gap:3px;background:#f1f5f9;padding:3px;border-radius:8px">
+        ${["pending","approved","rejected"].map(s=>'<button class="tab '+(appFilter===s?"active":"")+'" onclick="setAppFilter(\''+s+'\')" style="text-transform:capitalize">'+s+'</button>').join("")}
+      </div>
+    </div>`;
+
+    if(filtered.length===0){
+      h += '<div class="card" style="padding:50px;text-align:center"><p style="color:#94a3b8">No '+appFilter+' applications</p></div>';
+    } else {
+      h += '<div class="card">';
+      filtered.forEach(function(a){
+        const icon = a.status==="pending"?"⏳":a.status==="approved"?"✅":"❌";
+        const bc = a.status==="pending"?"amber":a.status==="approved"?"green":"red";
+        h += `<div class="row" onclick="viewApplication('${a.id}')">
+          <div style="font-size:20px;flex-shrink:0">${icon}</div>
+          <div style="flex:1;min-width:0">
+            <span style="font-size:14px;font-weight:600">${a.company_name}</span>
+            <p style="font-size:11px;color:#94a3b8;margin-top:2px">${a.contact_firstname} ${a.contact_surname} · ${a.region} · ${new Date(a.created_at).toLocaleDateString("en-GB")}</p>
+          </div>
+          <span class="badge badge-${bc}">${a.status}</span>
+        </div>`;
+      });
+      h += '</div>';
+    }
+    el.innerHTML = h;
+  }
+
+  window.setAppFilter = function(f){ appFilter=f; renderContent(); };
+
+  window.viewApplication = function(id){
+    const a = applications.find(x=>x.id===id);
+    if(!a) return;
+    const benefits = Array.isArray(a.benefits)?a.benefits:[];
+    const sal = fmtSal(a.salary_min,a.salary_max,a.salary_type);
+    const bc = a.status==="pending"?"amber":a.status==="approved"?"green":"red";
+    const el = document.getElementById("admin-content");
+
+    const fields = [
+      ["Company Email",a.company_email],["Company Phone",a.company_phone],
+      ["Contact",a.contact_firstname+" "+a.contact_surname],["Contact Email",a.contact_email],["Contact Phone",a.contact_phone],
+      ["Website",a.website],
+      ["Address",[a.address_line1,a.address_line2,a.city,a.county,a.postcode].filter(Boolean).join(", ")],
+      ["Region",a.region],["Ofsted Rating",a.ofsted_rating],["Ofsted Reg.",a.ofsted_registration_number],
+      ["Salary",sal]
+    ].filter(function(f){return f[1]});
+
+    let h = `<div class="card" style="padding:24px">
+      <button class="btn2" style="margin-bottom:16px;font-size:12px" onclick="renderContent()">← Back</button>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:20px">
+        <div>
+          <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:22px;margin-bottom:4px">${a.company_name}</h2>
+          <p style="font-size:12px;color:#94a3b8">Applied ${new Date(a.created_at).toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}</p>
+        </div>
+        <span class="badge badge-${bc}" style="font-size:13px;padding:5px 14px">${a.status}</span>
+      </div>
+      <div class="grid2" style="margin-bottom:20px">
+        ${fields.map(function(f){return '<div class="detail-row"><div class="detail-label">'+f[0]+'</div><div class="detail-value">'+f[1]+'</div></div>';}).join("")}
+      </div>`;
+    
+    if(a.description) h += '<div class="detail-row"><div class="detail-label">Description</div><div class="detail-value" style="font-size:13px;line-height:1.5">'+a.description+'</div></div>';
+    if(a.services) h += '<div class="detail-row"><div class="detail-label">Services</div><div class="detail-value" style="font-size:13px;line-height:1.5">'+a.services+'</div></div>';
+    if(benefits.length>0){
+      h += '<div class="detail-row"><div class="detail-label">Benefits</div><div>';
+      benefits.forEach(function(b){ h += '<span class="benefit-tag">'+b+'</span>'; });
+      h += '</div></div>';
+    }
+    if(a.logo_url) h += '<div class="detail-row"><div class="detail-label">Logo</div><img src="'+a.logo_url+'" style="height:60px;border-radius:10px;border:1px solid #e2e8f0"></div>';
+    
+    if(a.status==="pending"){
+      h += `<div style="border-top:2px solid #f1f5f9;padding-top:18px;margin-top:20px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn-success" style="padding:10px 22px;font-size:14px" onclick="approveApp('${a.id}')">✓ Approve & Add to Agencies</button>
+        <button class="btn-danger" style="padding:10px 22px;font-size:14px" onclick="rejectApp('${a.id}')">✕ Reject</button>
+      </div>`;
+    }
+    h += '</div>';
+    el.innerHTML = h;
+  };
+
+  window.approveApp = async function(id){
+    const a = applications.find(x=>x.id===id); if(!a) return;
+    try {
+      await api("agencies",{method:"POST",body:JSON.stringify({
+        name:a.company_name, email:a.company_email, phone:a.company_phone,
+        contact_firstname:a.contact_firstname, contact_surname:a.contact_surname,
+        contact_email:a.contact_email, contact_phone:a.contact_phone,
+        address_line1:a.address_line1, address_line2:a.address_line2,
+        city:a.city, county:a.county, postcode:a.postcode, region:a.region,
+        description:a.description, services:a.services, website:a.website,
+        ofsted_rating:a.ofsted_rating, ofsted_registration_number:a.ofsted_registration_number,
+        logo_url:a.logo_url, salary_min:a.salary_min, salary_max:a.salary_max,
+        salary_type:a.salary_type, benefits:a.benefits, is_active:true
+      })});
+      await api("agency_applications?id=eq."+id,{method:"PATCH",body:JSON.stringify({status:"approved",reviewed_at:new Date().toISOString()})});
+      await loadAll();
+    } catch(e){ alert("Error: "+e.message); }
+  };
+
+  window.rejectApp = async function(id){
+    if(!confirm("Reject this application?")) return;
+    try {
+      await api("agency_applications?id=eq."+id,{method:"PATCH",body:JSON.stringify({status:"rejected",reviewed_at:new Date().toISOString()})});
+      await loadAll();
+    } catch(e){ alert("Error: "+e.message); }
+  };
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>List Your Fostering Agency | Think Fostering</title>
+  <meta name="description" content="Register your fostering agency with Think Fostering. Complete our application form and get listed on the UK's leading fostering agency directory.">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'DM Sans',sans-serif;background:#0f172a;color:#1a1a1a;min-height:100vh}
+    
+    /* Nav - match existing site */
+    .tf-nav{background:#fff;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:100}
+    .tf-nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .tf-nav-logo img{height:36px}
+    .tf-nav-logo span{font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;color:#1a1a1a}
+    .tf-nav-link{color:#64748b;text-decoration:none;font-size:14px;font-weight:500;padding:8px 16px;border-radius:8px;transition:all .2s}
+    .tf-nav-link:hover{background:#f1f5f9;color:#1a1a1a}
+    
+    /* Hero */
+    .tf-hero{background:linear-gradient(180deg,#0f172a,#1e293b);padding:60px 20px 40px;text-align:center}
+    .tf-hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(28px,5vw,42px);color:#fff;margin-bottom:12px}
+    .tf-hero h1 span{color:#e91e8c}
+    .tf-hero p{color:#94a3b8;font-size:clamp(14px,2vw,17px);max-width:560px;margin:0 auto}
+    
+    /* Form Container */
+    .tf-form-wrap{max-width:800px;margin:-20px auto 40px;padding:0 20px}
+    .tf-form-card{background:#fff;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,0.25);overflow:hidden}
+    .tf-form-inner{padding:36px}
+    
+    /* Form sections */
+    .tf-section-title{font-size:14px;font-weight:700;color:#e91e8c;text-transform:uppercase;letter-spacing:1px;padding-bottom:10px;border-bottom:2px solid #fce7f3;margin:28px 0 18px}
+    .tf-section-title:first-child{margin-top:0}
+    
+    /* Grid */
+    .tf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .tf-grid-full{grid-column:1/-1}
+    @media(max-width:600px){.tf-grid{grid-template-columns:1fr}}
+    
+    /* Fields */
+    .tf-field label{display:block;font-size:12px;font-weight:700;color:#64748b;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+    .tf-field label .tf-req{color:#e91e8c}
+    .tf-field input,.tf-field select,.tf-field textarea{
+      width:100%;padding:11px 14px;border:1px solid #e2e8f0;border-radius:10px;font-size:14px;
+      font-family:'DM Sans',sans-serif;background:#f8fafc;outline:none;transition:border-color .2s;
+    }
+    .tf-field input:focus,.tf-field select:focus,.tf-field textarea:focus{border-color:#e91e8c;background:#fff}
+    .tf-field textarea{resize:vertical;min-height:90px}
+    .tf-field select{appearance:auto;cursor:pointer}
+    
+    /* Benefits Picker */
+    .tf-benefits{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+    .tf-benefit-btn{
+      padding:7px 16px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;
+      border:1px solid #e2e8f0;background:#fff;color:#475569;font-family:'DM Sans',sans-serif;
+      transition:all .15s;display:flex;align-items:center;gap:5px;
+    }
+    .tf-benefit-btn:hover{border-color:#c084fc;background:#faf5ff}
+    .tf-benefit-btn.active{border:2px solid #059669;background:#ecfdf5;color:#059669}
+    .tf-benefit-btn.active::before{content:"✓ "}
+    
+    /* Logo upload */
+    .tf-upload{padding:20px;border:2px dashed #e2e8f0;border-radius:12px;text-align:center;cursor:pointer;transition:all .2s}
+    .tf-upload:hover{border-color:#e91e8c;background:#fdf2f8}
+    .tf-upload input{display:none}
+    .tf-upload p{color:#64748b;font-size:13px}
+    .tf-upload-preview{margin-top:10px}
+    .tf-upload-preview img{height:60px;border-radius:10px;border:1px solid #e2e8f0}
+    
+    /* Buttons */
+    .tf-submit-btn{
+      background:linear-gradient(135deg,#e91e8c,#c2185b);color:#fff;border:none;border-radius:12px;
+      padding:14px 40px;font-size:16px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;
+      transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:8px;
+    }
+    .tf-submit-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(233,30,140,0.3)}
+    .tf-submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .tf-cancel-btn{
+      background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;border-radius:12px;
+      padding:14px 28px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;
+      text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+    }
+    
+    /* Success */
+    .tf-success{text-align:center;padding:60px 40px}
+    .tf-success-icon{width:70px;height:70px;border-radius:50%;background:#ecfdf5;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:30px}
+    .tf-success h2{font-family:'Playfair Display',Georgia,serif;font-size:26px;margin-bottom:10px;color:#1a1a1a}
+    .tf-success p{color:#64748b;font-size:15px;max-width:420px;margin:0 auto 28px}
+    .tf-back-btn{
+      background:#0f172a;color:#fff;border:none;border-radius:12px;padding:12px 28px;
+      font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;
+    }
+    
+    /* Footer */
+    .tf-footer{background:#0f172a;border-top:1px solid rgba(255,255,255,0.08);padding:30px 20px;text-align:center}
+    .tf-footer p{color:#475569;font-size:13px}
+    .tf-footer a{color:#94a3b8;text-decoration:none}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="tf-nav">
+  <a href="index.html" class="tf-nav-logo">
+    <img src="images/think-fostering-logo.webp" alt="Think Fostering" onerror="this.style.display='none'">
+    <span>Think Fostering</span>
+  </a>
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <a href="find-an-agency.html#find-agency" class="tf-nav-link">Find Agency</a>
+    <a href="index.html" class="tf-nav-link">Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="tf-hero">
+  <h1>List Your <span>Fostering Agency</span></h1>
+  <p>Complete the form below to apply for a listing on Think Fostering. We'll review your application and be in touch.</p>
+</div>
+
+<!-- FORM -->
+<div class="tf-form-wrap">
+  <div class="tf-form-card">
+    
+    <!-- Success State (hidden by default) -->
+    <div id="tf-success" class="tf-success" style="display:none">
+      <div class="tf-success-icon">✅</div>
+      <h2>Application Submitted!</h2>
+      <p>Thank you for applying to list your agency with Think Fostering. We'll review your details and be in touch shortly.</p>
+      <a href="index.html" class="tf-back-btn">← Back to Think Fostering</a>
+    </div>
+
+    <!-- Form State -->
+    <div id="tf-form" class="tf-form-inner">
+      <p style="font-size:14px;color:#64748b;margin-bottom:24px">Fields marked with <span style="color:#e91e8c;font-weight:700">*</span> are required.</p>
+
+      <!-- Company Details -->
+      <div class="tf-section-title">Company Details</div>
+      <div class="tf-grid">
+        <div class="tf-field tf-grid-full">
+          <label>Company Name <span class="tf-req">*</span></label>
+          <input id="f-company-name" placeholder="e.g. Bright Futures Fostering">
+        </div>
+        <div class="tf-field">
+          <label>Company Email <span class="tf-req">*</span></label>
+          <input id="f-company-email" type="email" placeholder="info@agency.co.uk">
+        </div>
+        <div class="tf-field">
+          <label>Company Phone</label>
+          <input id="f-company-phone" type="tel" placeholder="0800 123 4567">
+        </div>
+        <div class="tf-field">
+          <label>Website</label>
+          <input id="f-website" type="url" placeholder="https://www.agency.co.uk">
+        </div>
+      </div>
+
+      <!-- Contact Person -->
+      <div class="tf-section-title">Contact Person</div>
+      <div class="tf-grid">
+        <div class="tf-field">
+          <label>First Name <span class="tf-req">*</span></label>
+          <input id="f-firstname" placeholder="John">
+        </div>
+        <div class="tf-field">
+          <label>Surname <span class="tf-req">*</span></label>
+          <input id="f-surname" placeholder="Smith">
+        </div>
+        <div class="tf-field">
+          <label>Contact Email <span class="tf-req">*</span></label>
+          <input id="f-contact-email" type="email" placeholder="john@agency.co.uk">
+        </div>
+        <div class="tf-field">
+          <label>Contact Phone</label>
+          <input id="f-contact-phone" type="tel" placeholder="07700 900000">
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="tf-section-title">Address</div>
+      <div class="tf-grid">
+        <div class="tf-field">
+          <label>Address Line 1</label>
+          <input id="f-addr1" placeholder="Street address">
+        </div>
+        <div class="tf-field">
+          <label>Address Line 2</label>
+          <input id="f-addr2" placeholder="Building, suite...">
+        </div>
+        <div class="tf-field">
+          <label>City / Town <span class="tf-req">*</span></label>
+          <input id="f-city" placeholder="Manchester">
+        </div>
+        <div class="tf-field">
+          <label>County</label>
+          <input id="f-county" placeholder="Greater Manchester">
+        </div>
+        <div class="tf-field">
+          <label>Postcode <span class="tf-req">*</span></label>
+          <input id="f-postcode" placeholder="M1 1AA">
+        </div>
+        <div class="tf-field">
+          <label>Region <span class="tf-req">*</span></label>
+          <select id="f-region">
+            <option value="">-- Select Region --</option>
+            <option>North West</option><option>North East</option><option>Yorkshire and the Humber</option>
+            <option>West Midlands</option><option>East Midlands</option><option>East of England</option>
+            <option>South East</option><option>South West</option><option>London</option>
+            <option>Wales</option><option>Scotland</option><option>Northern Ireland</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="tf-section-title">About Your Agency</div>
+      <div class="tf-grid">
+        <div class="tf-field tf-grid-full">
+          <label>Description</label>
+          <textarea id="f-description" placeholder="Tell us about your agency, your ethos and what makes you different..."></textarea>
+        </div>
+        <div class="tf-field tf-grid-full">
+          <label>Services Offered</label>
+          <textarea id="f-services" placeholder="e.g. Short-term fostering, Long-term fostering, Emergency placements, Therapeutic care, Parent & Child..."></textarea>
+        </div>
+      </div>
+
+      <!-- Ofsted -->
+      <div class="tf-section-title">Ofsted</div>
+      <div class="tf-grid">
+        <div class="tf-field">
+          <label>Registration Number</label>
+          <input id="f-ofsted-reg" placeholder="e.g. SC123456">
+        </div>
+        <div class="tf-field">
+          <label>Ofsted Rating</label>
+          <select id="f-ofsted-rating">
+            <option value="">-- Select --</option>
+            <option>Outstanding</option><option>Good</option><option>Requires Improvement</option>
+            <option>Inadequate</option><option>Not Yet Inspected</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Salary -->
+      <div class="tf-section-title">Salary / Allowances</div>
+      <div class="tf-grid">
+        <div class="tf-field">
+          <label>Minimum (£)</label>
+          <input id="f-sal-min" type="number" placeholder="e.g. 400">
+        </div>
+        <div class="tf-field">
+          <label>Maximum (£)</label>
+          <input id="f-sal-max" type="number" placeholder="e.g. 700">
+        </div>
+        <div class="tf-field">
+          <label>Pay Period</label>
+          <select id="f-sal-type">
+            <option value="weekly">Per Week</option>
+            <option value="monthly">Per Month</option>
+            <option value="annual">Per Year</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="tf-section-title">What Benefits Do You Offer?</div>
+      <p style="font-size:13px;color:#64748b;margin-bottom:12px">Select all that apply:</p>
+      <div id="tf-benefits" class="tf-benefits"></div>
+
+      <!-- Logo -->
+      <div class="tf-section-title">Agency Logo</div>
+      <div class="tf-upload" onclick="document.getElementById('f-logo-input').click()">
+        <input type="file" id="f-logo-input" accept="image/*" onchange="tfHandleLogo(this)">
+        <p>📎 Click to upload your agency logo (PNG, JPG, WebP)</p>
+        <div id="tf-logo-preview" class="tf-upload-preview"></div>
+      </div>
+
+      <!-- Submit -->
+      <div style="margin-top:32px;padding-top:24px;border-top:2px solid #f1f5f9;display:flex;gap:14px;flex-wrap:wrap">
+        <button id="tf-submit-btn" class="tf-submit-btn" onclick="tfSubmitApplication()">
+          Submit Application →
+        </button>
+        <a href="index.html" class="tf-cancel-btn">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="tf-footer">
+  <p>&copy; 2026 <a href="index.html">Think Fostering</a>. All rights reserved.</p>
+</footer>
+
+<script>
+(function(){
+  const SUPA_URL = "https://jixrqmlfuwsazzcfenmh.supabase.co";
+  const SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppeHJxbWxmdXdzYXp6Y2Zlbm1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDkwNDAsImV4cCI6MjA4ODM4NTA0MH0.FVFePooOrcqXR-TF6-90403K6lv5GbUY92MDD1H-Sd4";
+
+  const BENEFITS = ["Training","24/7 Support","Respite Cover","Healthcare","Generous Allowances","Peer Support Groups","Dedicated Social Worker","Therapeutic Services","Education Support","Holiday Allowance","Tax Exemptions","Career Development","Insurance Cover","Annual Reviews"];
+  let selectedBenefits = [];
+  let logoUrl = "";
+
+  // Render benefit buttons
+  const bc = document.getElementById("tf-benefits");
+  BENEFITS.forEach(function(b){
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "tf-benefit-btn";
+    btn.textContent = b;
+    btn.onclick = function(){
+      if(selectedBenefits.includes(b)){
+        selectedBenefits = selectedBenefits.filter(x=>x!==b);
+        btn.classList.remove("active");
+      } else {
+        selectedBenefits.push(b);
+        btn.classList.add("active");
+      }
+    };
+    bc.appendChild(btn);
+  });
+
+  // Logo upload
+  window.tfHandleLogo = async function(input){
+    const file = input.files[0];
+    if(!file) return;
+    const preview = document.getElementById("tf-logo-preview");
+    preview.innerHTML = '<p style="color:#e91e8c;font-size:12px">Uploading...</p>';
+    try {
+      const fn = Date.now()+"-"+file.name;
+      const r = await fetch(SUPA_URL+"/storage/v1/object/logos/"+fn, {
+        method:"POST", headers:{apikey:SUPA_KEY,Authorization:"Bearer "+SUPA_KEY,"Content-Type":file.type}, body:file
+      });
+      if(!r.ok) throw new Error("Upload failed");
+      logoUrl = SUPA_URL+"/storage/v1/object/public/logos/"+fn;
+      preview.innerHTML = '<img src="'+logoUrl+'" alt="Logo preview">';
+    } catch(e){
+      preview.innerHTML = '<p style="color:#dc2626;font-size:12px">Upload failed. Please try again.</p>';
+    }
+  };
+
+  // Submit
+  window.tfSubmitApplication = async function(){
+    const v = id => (document.getElementById(id).value||"").trim();
+    
+    // Validate required
+    if(!v("f-company-name")||!v("f-company-email")||!v("f-firstname")||!v("f-surname")||!v("f-contact-email")||!v("f-city")||!v("f-postcode")||!v("f-region")){
+      alert("Please fill in all required fields (marked with *).");
+      return;
+    }
+    
+    const btn = document.getElementById("tf-submit-btn");
+    btn.disabled = true;
+    btn.textContent = "Submitting...";
+    
+    const data = {
+      company_name: v("f-company-name"),
+      company_email: v("f-company-email"),
+      company_phone: v("f-company-phone"),
+      website: v("f-website"),
+      contact_firstname: v("f-firstname"),
+      contact_surname: v("f-surname"),
+      contact_email: v("f-contact-email"),
+      contact_phone: v("f-contact-phone"),
+      address_line1: v("f-addr1"),
+      address_line2: v("f-addr2"),
+      city: v("f-city"),
+      county: v("f-county"),
+      postcode: v("f-postcode"),
+      region: v("f-region"),
+      description: v("f-description"),
+      services: v("f-services"),
+      ofsted_registration_number: v("f-ofsted-reg"),
+      ofsted_rating: v("f-ofsted-rating"),
+      salary_min: v("f-sal-min") ? Number(v("f-sal-min")) : null,
+      salary_max: v("f-sal-max") ? Number(v("f-sal-max")) : null,
+      salary_type: v("f-sal-type") || "weekly",
+      benefits: selectedBenefits,
+      logo_url: logoUrl || null
+    };
+
+    try {
+      const r = await fetch(SUPA_URL+"/rest/v1/agency_applications", {
+        method: "POST",
+        headers: { apikey:SUPA_KEY, Authorization:"Bearer "+SUPA_KEY, "Content-Type":"application/json", Prefer:"return=minimal" },
+        body: JSON.stringify(data)
+      });
+      if(!r.ok) throw new Error(await r.text());
+      document.getElementById("tf-form").style.display = "none";
+      document.getElementById("tf-success").style.display = "block";
+      window.scrollTo({top:0,behavior:"smooth"});
+    } catch(e){
+      alert("Error submitting application. Please try again.\n"+e.message);
+      btn.disabled = false;
+      btn.textContent = "Submit Application →";
+    }
+  };
+})();
+</script>
+</body>
+</html>
