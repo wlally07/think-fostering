@@ -241,23 +241,22 @@
         </div>
       </div>
 
-      <!-- Salary -->
-      <div class="tf-section-title">Salary / Allowances</div>
+      <!-- Weekly Allowance & Healthcare -->
+      <div class="tf-section-title">Allowance & Healthcare</div>
       <div class="tf-grid">
         <div class="tf-field">
-          <label>Minimum (£)</label>
-          <input id="f-sal-min" type="number" placeholder="e.g. 400">
+          <label>Estimated Weekly Allowance (£)</label>
+          <div style="display:flex;gap:10px;">
+            <input id="f-sal-min" type="number" placeholder="Min e.g. £400" style="width:50%">
+            <input id="f-sal-max" type="number" placeholder="Max e.g. £700" style="width:50%">
+          </div>
         </div>
         <div class="tf-field">
-          <label>Maximum (£)</label>
-          <input id="f-sal-max" type="number" placeholder="e.g. 700">
-        </div>
-        <div class="tf-field">
-          <label>Pay Period</label>
-          <select id="f-sal-type">
-            <option value="weekly">Per Week</option>
-            <option value="monthly">Per Month</option>
-            <option value="annual">Per Year</option>
+          <label>Do You Offer Private Healthcare?</label>
+          <select id="f-healthcare">
+            <option value="">-- Select --</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
           </select>
         </div>
       </div>
@@ -373,7 +372,8 @@
       ofsted_rating: v("f-ofsted-rating"),
       salary_min: v("f-sal-min") ? Number(v("f-sal-min")) : null,
       salary_max: v("f-sal-max") ? Number(v("f-sal-max")) : null,
-      salary_type: v("f-sal-type") || "weekly",
+      salary_type: "weekly",
+      private_healthcare: v("f-healthcare") === "yes" ? true : v("f-healthcare") === "no" ? false : null,
       benefits: selectedBenefits,
       logo_url: logoUrl || null
     };
